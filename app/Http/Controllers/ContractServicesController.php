@@ -83,9 +83,11 @@ class ContractServicesController extends Controller
      * @param  \App\ContractServices  $contractServices
      * @return \Illuminate\Http\Response
      */
-    public function show(ContractServices $contractServices)
+    public function show()
     {
-        //
+        $data = ContractServices::where('id',$_GET['id'])->first();
+        return view('layouts.includes.Contract.ContractServices',['dservice'=>$data]);
+
     }
 
     /**
@@ -108,7 +110,7 @@ class ContractServicesController extends Controller
      */
     public function update(Request $request)
     {
-        $data = ContractServices::where('id',$_GET['serid'])->first();
+        $data = ContractServices::where('id',$request->input('id'))->first();
 
         $data->ServiceName =$request->input('ServiceSymbol');
         $data->DeviceUnit =$request->input('Device_Unit');
@@ -119,7 +121,8 @@ class ContractServicesController extends Controller
         $data->SumTotal = $IntBasePay * $request->input('Total');
 
         if($data->update()){
-            return redirect()->route('ctitem')->withSuccessMessage(__('msg.Success'));
+            return back()->with('success','Contract Services Updated successfully!');
+           // return redirect()->route('ctitem')->withSuccessMessageUpdate(__('msg.Success_update'));
         } else {
             return back()->withErrorMessage(__('msg.Error'));
         }

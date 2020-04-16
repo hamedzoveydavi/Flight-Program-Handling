@@ -69,18 +69,22 @@
                 <thead>
                 <th>
                     <button  class="btn" style="width: 280px;height: 40px"
-                             onclick=" myPopup ('{{Route('ServicesItemPage',['ContractNum'=>$data->ContractNum,'Minid'=>$mm->id])}}', 'web', 600,350);">
+                             onclick=" myPopup ('{{Route('ServicesItemPage',['ContractNum'=>$data->ContractNum,'Minid'=>$mm->id])}}', 'web', 600,390);">
                         <i class="fa fa-plus"></i>   <i> Services Form</i></button>
 
                 </th>
-                <th colspan="6" style="width: 15%"> (Type : {{$mm->Type}}) // (MinGrountTime : {{$mm->MinGroundTime}}) //
+                <th colspan="6" style="width: 15%;padding-top: 5px">
+                    <label style="background-color: #737373;border-radius: 5px;width: 150px;height: 25px">Type : {{$mm->Type}} </label>
+                    <label style="background-color: #737373;border-radius: 5px;width: 200px;height: 25px">MinGrountTime : {{$mm->MinGroundTime}} </label>
+                    <label style="background-color: #737373;border-radius: 5px;width: auto;height: 25px">
                    Contract Price : <?php $sum=0 ;
                     foreach($sdata as $s1){
                          if ($mm->id == $s1->Minid){
                         $sum += $s1->SumTotal ;}}
                          echo number_format($sum).'&nbsp;';
                          echo $s1->CurrencyUnit;
-                         ?> 
+                         ?>
+                    </label>
 
                 </th>
                 </thead>
@@ -102,7 +106,7 @@
                     <td> {{$ss->BasePay}} {{$ss->CurrencyUnit}}</td>
                     <td>{{$ss->Total}} {{$ss->DeviceUnit}}</td>
                     <td>{{$ss->SumTotal}} {{$ss->CurrencyUnit}}</td>
-                    <td> <a href="#" onclick=" myPopup ('{{Route('ContractItem')}}', 'web', 500,300);"><img src="images/edit.png"></a>
+                    <td> <a href="#" onclick=" myPopup ('{{Route('ServicesItemPageForUpdate',['id'=>$ss->id])}}', 'web', 600,390);"><img src="images/edit.png"></a>
                         <a id="delete"  href="{{Route('ServiceDelete',['serid'=>$ss->id])}}"> <img src="images/delete.png"></a></td>
                 </tr>
 

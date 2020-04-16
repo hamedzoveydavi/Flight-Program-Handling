@@ -54,29 +54,17 @@
         </thead>
         <tbody>
 
-
-
         @foreach( $tblflight as $c)
 
             <tr>
                 <TD >
-
-
                     @switch ($c->Status)
                         @case (0)
                         <b> <u>
-                                  <a class="dropdown-item" href="{{ route('SelectInfo',['id'=>$c->id])}}
-                                      {{-- onclick="event.preventDefault();
-                                                     document.getElementById('flt-form').submit();--}}">
+                                  <a class="dropdown-item" href="{{ route('SelectInfo',['id'=>$c->id])}}">
                                         {{ $c->id }}
                                     </a>
-
-                                    {{--<form id="flt-form" action="{{ route('SelectInfo')}}" method="POST" style="display: none;">
-                                        @csrf
-                                        <input name="id" value="{{$c->id}}">
-                                    </form>--}}
-
-                                </u></b>
+                         </u></b>
 
                         @break
                         @case (1)
@@ -93,12 +81,6 @@
                             </a></b>
                         @break
                     @endswitch
-
-
-
-
-
-
                 </TD>
 
                 <td>{{ $c->Airline }}</td>

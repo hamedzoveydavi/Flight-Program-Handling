@@ -15,6 +15,8 @@ return [
     */
 
         'Success' => "Data Saved Successfully",
+        'Success_delete'=>'Data Deleted Successfully',
+        'Success_update'=>'Data Updated Successfully',
         'Error'=>'Error saving data , Please try again'
 
 ];

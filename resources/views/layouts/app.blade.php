@@ -229,6 +229,53 @@
                 </div>
             </li>
 
+
+            <?php $acc30 = \App\Accessory::where('userid',$userid)->where('AccessoryName','BaseInfo')->select(1)->count();?>
+            <li class="nav-item <?php  if ($acc30 == 0){
+            echo ('hide');}?>">
+                <a class="nav-link" data-toggle="collapse" href="#BaseInfo" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="mdi mdi-palette menu-icon"></i>
+                    <span class="menu-title">Base Info</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="BaseInfo">
+
+
+                        <ul class="nav flex-column sub-menu " >
+
+                            <?php $acc23 = \App\Accessory::where('userid',$userid)->where('AccessoryName','StationList')->select(1)->count();?>
+                            <li class="nav-item <?php  if ($acc23 == 0){
+                            echo ('hide');}?>"  ><a class="nav-link" href="{{route('StationList')}}"
+                                >Station List</a></li>
+
+                                <?php $acc24 = \App\Accessory::where('userid',$userid)->where('AccessoryName','AircraftTypeList')->select(1)->count();?>
+                                <li class="nav-item <?php  if ($acc24 == 0){
+                                echo ('hide');}?>"  ><a class="nav-link" href="{{route('AircraftTypeList')}}"
+                                    >AircraftType List</a></li>
+
+
+                                <?php $acc25 = \App\Accessory::where('userid',$userid)->where('AccessoryName','ShareAirportList')->select(1)->count();?>
+                                <li class="nav-item <?php  if ($acc24 == 0){
+                                echo ('hide');}?>"  ><a class="nav-link" href="{{route('ShareAirportList')}}"
+                                    >ShareAirport List</a></li>
+
+                            <?php $acc3 = \App\Accessory::where('userid',$userid)->where('AccessoryName','BasicRate')->select(1)->count();?>
+                            <li class="nav-item <?php  if ($acc3 == 0){
+                            echo ('hide');}?>"  ><a class="nav-link" href="{{route('BasicRateView')}}"
+                                >Basic Rate</a></li>
+
+
+                        <?php $acc31 = \App\Accessory::where('userid',$userid)->where('AccessoryName','CargoBase')->select(1)->count();?>
+                        <li class="nav-item <?php  if ($acc31 == 0){
+                        echo ('hide');}?>"  ><a class="nav-link" href="{{route('CargoBase')}}"
+                            >Cargo Base</a></li>
+                    </ul>
+
+                </div>
+            </li>
+
+
+
             <?php $acc13 = \App\Accessory::where('userid',$userid)->where('AccessoryName','Contract')->select(1)->count();?>
             <li class="nav-item <?php  if ($acc13 == 0){
                 echo ('hide');}?>">
@@ -266,13 +313,10 @@
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu " >
-                        <?php $acc3 = \App\Accessory::where('userid',$userid)->where('AccessoryName','BasicRate')->select(1)->count();?>
-                        <li class="nav-item <?php  if ($acc3 == 0){
-                            echo ('hide');}?>"  ><a class="nav-link" href="{{route('BasicRateView')}}"
-                                >Basic Rate</a></li>
 
-                            <?php $acc4 = \App\Accessory::where('userid',$userid)->where('AccessoryName','CreateFlight')->select(1)->count();?>
+                    <ul class="nav flex-column sub-menu " >
+
+                        <?php $acc4 = \App\Accessory::where('userid',$userid)->where('AccessoryName','CreateFlight')->select(1)->count();?>
                         <li class="nav-item <?php  if ($acc4 == 0){
                             echo ('hide');}?>"  > <a class="nav-link" href="{{route('CreateFlight')}}">Create Flight</a></li>
 

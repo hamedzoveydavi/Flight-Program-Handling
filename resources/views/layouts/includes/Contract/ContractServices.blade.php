@@ -3,19 +3,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
-    .FormContiner{
-        border: 1px #1E90FF solid;
-        border-radius: 5px;
-        margin: 5px 10px 10px 10px;
-    }
-    #ContractHeader{
-        height: 40px;
-        background-color: #d5d8dc ;
-        border: 1px #1E90FF solid ;
-        text-align: left;
-        font:2em bold;
-        padding-bottom: 5px
-    }
 
     .btn {
         background-color: DodgerBlue; /* Blue background */
@@ -37,8 +24,13 @@
     <div id="ServicesBox" class="FormContiner">
         <div id="ContractHeader"> Services List</div>
 
-        <form method="post" action="{{Route('ServicesStore')}}">
+        @if (!empty($data))
+            <form method="post" action="{{Route('ServicesStore')}}">
             @csrf
+        @else
+            <form method="post" action="{{Route('ServicesUpdate')}}">
+            @csrf
+        @endif
 
 
             <div class="divTableRow">
@@ -47,6 +39,9 @@
 
 
                     {{------------------------------------ServiceSymbol-----------------------------------------}}
+
+                    <input type="text" name="id" value="<?php if(!empty($dservice)){ echo $dservice->id ; } ?>"  style="display: none" >
+
                     <input type="text" name="ContractNum_" value="<?php if(!empty($data)){ echo $data->ContractNum ; } ?>"  style="display: none" >
                     <input type="text" name="Minid" value="<?php if(!empty( $_GET['Minid'])){echo  $_GET['Minid'] ;} ?>"   style="display: none">
 
@@ -57,8 +52,13 @@
                         /*** query the database ***/
                         $result = Services::select('ServiceSymbol')->get();
                         ?>
-                        <option hidden value="" disabled selected>Select a Service</option>
-                        /*** loop over the results ***/
+                            @if(!empty($dservice))
+                                <option > {{$dservice->ServiceName}} </option>
+                            @else
+                                <option hidden value="" disabled selected>Select a Service</option>
+                            @endif
+
+                           /*** loop over the results ***/
                         @foreach($result as $row)
                             /*** create the options ***/
                             <option >
@@ -73,7 +73,11 @@
             <div class="divTableCell">
                 <div  class="input-group" style="padding: 10px 10px 10px 10px">
                     <select name="Device_Unit" style="width: 250px;height: 35px;">
-                        <option hidden value="" disabled selected>Select a Device unit</option>
+                        @if(!empty($dservice))
+                            <option > {{$dservice->DeviceUnit}} </option>
+                        @else
+                            <option hidden value="" disabled selected>Select a Currency unit</option>
+                        @endif
                         /*** create the options ***/
                         <option >Device</option>
                         <option >Time</option>
@@ -91,7 +95,8 @@
                         <label style="border-radius:15px 0 0 15px;height: 36px;border: 1px solid #DCDCDC" class="input-group-text" style="height: 37px">Base Pay</label>
                     </div>
                     <input id="BasePay"  onkeyup="separateNum(this.value,this);" style="text-align: center"
-                           type="text" class="form-control @error('BasePay') is-invalid @enderror"  name="BasePay" placeholder="1,000,000">
+                           type="text" class="form-control @error('BasePay') is-invalid @enderror"  name="BasePay" placeholder="1,000,000"
+                    value="<?php if(!empty($dservice)){echo $dservice->BasePay ;} ?>" >
                     @error('BasePay')
                     <span class="invalid-feedback" role="alert">
                          <strong>{{ $message }}</strong>
@@ -124,16 +129,20 @@
             {{------------------------------------Currency unit-----------------------------------------}}
             <div class="divTableCell">
                 <div  class="input-group" style="padding: 10px 10px 10px 10px">
-                    <select name="Currencyـunit" style="width: 250px;height: 35px; left: 50px;">
-                        <option hidden value="" disabled selected>Select a Currency unit</option>
-                        /*** create the options ***/
+                    <select name="Currencyـunit"  style="width: 250px;height: 35px; left: 50px;">
+                       @if(!empty($dservice))
+                            <option > {{$dservice->CurrencyUnit}} </option>
+                        @else
+                             <option hidden value="" disabled selected>Select a Currency unit</option>
+                        @endif
+                            /*** create the options ***/
                         <option > ریال </option>
                         <option >تومان </option>
                         <option >USD $</option>
                         <option >ERU €</option>
                     </select>
                 </div>
-            </div>
+             </div>
             </div>
            {{------------------------------------Total-----------------------------------------}}
             <div class="divTableRow">
@@ -144,25 +153,32 @@
                         <label style="border-radius:15px 0 0 15px;height: 37px;border: 1px solid #DCDCDC" class="input-group-text">Total</label>
                     </div>
                     <input id="Total" style="text-align: center"
-                           type="text" class="form-control @error('Total') is-invalid @enderror"  name="Total" >
+                           type="text" class="form-control @error('Total') is-invalid @enderror"  name="Total"
+                           value="<?php if(!empty($dservice)){echo $dservice->Total ;} ?>" >
                     @error('Total')
                     <span class="invalid-feedback" role="alert">
                          <strong>{{ $message }}</strong>
                          </span>
                     @enderror
                 </div>
-            </div>
+              </div>
             </div>
            {{------------------------------------btn-----------------------------------------}}
 
                 <div  style="top: 5px;padding-bottom: 10px;text-align: center">
+                    @if(!empty($dservice))
+                        <button id="btn" class="btn" style="width: 330px;height: 40px"><i class="fa fa-edit"></i>     <i> Update</i> </button>
+                    @else
                     <button id="btn" class="btn" style="width: 330px;height: 40px"><i class="fa fa-save"></i>     <i> Save</i> </button>
+                        @endif
                 </div>
 {{--{{csrf_field()}}--}}
         </form>
+
     </div>
+
 <div id="messages"></div>
-<br>
+
 @include('layouts.includes.flash-message')
 
 

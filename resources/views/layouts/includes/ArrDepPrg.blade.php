@@ -34,6 +34,7 @@
         <br>
        @include('layouts.includes.flash-message')
 
+
         @component('components.textCoor',[
                'name'=>'Airline',
                'is_insert'=>true

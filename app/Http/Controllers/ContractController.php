@@ -19,7 +19,7 @@ class ContractController extends Controller
         $Contract =Contract::all();
         // where('EndDate','<=',date('m-d-y'))->get();
         return view('layouts.includes.Contract.ContractList',['CnList'=>$Contract]);
-        
+
     }
 
     /**
@@ -63,9 +63,10 @@ class ContractController extends Controller
      * @param  \App\Contract  $contract
      * @return \Illuminate\Http\Response
      */
-    public function show(Contract $contract)
+    public function show()
     {
-        //
+        $data = Contract::where('ContractNum',$_POST['contract'])->get();
+        return view('layouts.includes.Contract.ContractList',['CnList'=>$data]);
     }
 
     /**
@@ -86,9 +87,10 @@ class ContractController extends Controller
      * @param  \App\Contract  $contract
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contract $contract)
+    public function update(Request $request)
     {
-        //
+
+
     }
 
     /**

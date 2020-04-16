@@ -20,16 +20,12 @@
     legend {
         padding: 2px;
     }
-
 </style>
-
-
 
 <form method="post" action="{{Route('SaveFlightInfo')}}">
     @csrf
 
-
-    <input type="text" name="id" value="{{$info->id}}" style="display: none">
+    <input type="text" name="id" value="{{$info->id}}"{{-- style="display: none"--}}>
 
     <div style="border: 1px #DCDCDC solid;border-radius: 5px;padding: 3px 0px 3px 3px;">
         <div class="divTable">
@@ -191,12 +187,46 @@
                             @endcomponent
                         </div>
                     </div>
+
+                    </div>
                 </div>
             </div>
+
+        {{-----------------------------Cargo Arrival---------------------------}}
+        <div style="width: 50%;margin: 0 0 10px 10px;border-radius: 5px;border: 1px solid #1E90FF ">
+
+            <div class="divTableRow" >
+                <div class="divTableCell" style="width: 3%;padding: 0 0 0 0">
+                    <span style="background-color: #1E90FF;border-radius: 5px" class="input-group-text">Cargo</span>
+
+                </div>
+                <div class="divTableCell" style="width: 20.5%">
+                    @component('components.InputForFetch',[
+                                                              'name'=>'PaxCargoArr',
+                                                              'subject'=>'Pax'
+                                                              ,'value'=>$info->PaxCargoArr
+
+                                                               ])
+                    @endcomponent
+                </div>
+                <div class="divTableCell" style="width: 20.5%">
+                    @component('components.InputForFetch',[
+                                                               'name'=>'WeightCargoArr',
+                                                               'subject'=>'Weight'
+                                                               ,'value'=>$info->WeightCargoArr
+
+                                                                ])
+                    @endcomponent
+                </div>
+            </div>
+
         </div>
+        {{-----------------------------Cargo Arrival---------------------------}}
+        </div>
+
     </div><br>
 
-    <div style="border: 1px #7FFFD4 solid;border-radius: 5px">
+    <div style="border: 1px #7FFFD4 solid;border-radius: 5px ;margin: 0 25px 0 25px">
         <div  style="height: 40px;background-color: #7FFFD4 ;text-align: center;font:2em bold"> DEPARTURE</div>
         <div>
             <div class="divTable">
@@ -289,10 +319,42 @@
                     </div>
                 </div>
             </div>
+            {{-------------------------------Cargo Dep--------------------------------}}
+            <div style="width: 50%;margin: 0 0 10px 10px;border-radius: 5px;border: 1px solid #1E90FF ">
+
+                <div class="divTableRow" >
+                    <div class="divTableCell" style="width: 3%;padding: 0 0 0 0">
+                        <span style="background-color: #1E90FF;border-radius: 5px" class="input-group-text">Cargo</span>
+
+                    </div>
+                    <div class="divTableCell" style="width: 20.5%">
+                        @component('components.InputForFetch',[
+                                                                  'name'=>'PaxCargoDep',
+                                                                  'subject'=>'Pax'
+                                                                  ,'value'=>$info->PaxCargoDep
+
+                                                                   ])
+                        @endcomponent
+                    </div>
+                    <div class="divTableCell" style="width: 20.5%">
+                        @component('components.InputForFetch',[
+                                                                   'name'=>'WeightCargoDep',
+                                                                   'subject'=>'Weight'
+                                                                   ,'value'=>$info->WeightCargoDep
+
+                                                                    ])
+                        @endcomponent
+                    </div>
+                </div>
+
+            </div>
+            {{-------------------------------Cargo Dep--------------------------------}}
+
+
         </div>
     </div><br>
 
-    <div style="border: 1px #D3D3D3 solid;border-radius: 5px">
+    <div style="border: 1px #D3D3D3 solid;border-radius: 5px;margin: 0 25px 0 25px">
         <div style="height: 40px;background-color: #D3D3D3 ;text-align: center;font:2em bold"> GATE / HALL</div>
         <div>
             <div class="divTable">
@@ -377,9 +439,11 @@
 
     {{--@endif--}}
     <br>
-    <textarea rows="6" cols="100" name="Remark" placeholder="Remark">{{ $info->Remark }}</textarea>
-    <div style="text-align: center">
-        <button onclick="myFunction()" style="width: 250px;height: 50px;border-radius: 5px" type="submit" class="btn btn-success">Save Info</button>
+    <div style="margin: 0 25px 10px 25px">
+        <textarea  rows="6" cols="100" name="Remark" placeholder="Remark">{{ $info->Remark }}</textarea>
+    </div>
+        <div style="text-align: center">
+        <button  style="width: 250px;height: 50px;border-radius: 5px;margin-top: 10px" type="submit" class="btn btn-success">Save Info</button>
     </div>
 </form>
 

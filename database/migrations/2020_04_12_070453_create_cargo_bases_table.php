@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBasicRatesTable extends Migration
+class CreateCargoBasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateBasicRatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('basic_rates', function (Blueprint $table) {
+        Schema::create('cargo_bases', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Subject')->nullable(false);
-            $table->integer('Percent')->nullable(false);
+            $table->integer('minkg')->nullable(false);
+            $table->integer('maxkg')->nullable(false);
+            $table->integer('price')->nullable(false);
+            $table->string('Currency_Unit',7)->nullable(false);
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateBasicRatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('basic_rates');
+        Schema::dropIfExists('cargo_bases');
     }
 }

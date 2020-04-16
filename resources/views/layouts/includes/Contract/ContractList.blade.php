@@ -1,9 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <style>
-     
-
-
         .btn {
             background-color: DodgerBlue; /* Blue background */
             border: none; /* Remove borders */
@@ -18,50 +15,58 @@
             background-color: RoyalBlue;
         }
 
-     
-    </style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        form.example input[type=text] {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #f1f1f1;
+        }
+
+        form.example button {
+            float: left;
+            width: 20%;
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            font-size: 17px;
+            border: 1px solid grey;
+            border-left: none;
+            cursor: pointer;
+        }
+
+        form.example button:hover {
+            background: #0b7dda;
+        }
+
+        form.example::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+
+</style>
+
+@include('layouts.includes.func.DateConvert')
 
 
 
+<div class="groupbox-shadow" style="width: 640px" >
+<form class="example" method="post" action="{{Route('ContactSearch')}}" style="margin: 0 0 10px 0;max-width:600px">
+    @csrf
+    <button type="submit"><i class="fa fa-search"></i></button>
+    <input type="text" placeholder="Search.." name="contract">
+</form>
 
-<?php 
-
-function MiladiToShamsi($gy,$gm,$gd,$mod='-'){
-    $g_d_m=array(0,31,59,90,120,151,181,212,243,273,304,334);
-    if($gy>1600){
-     $jy=979;
-     $gy-=1600;
-    }else{
-     $jy=0;
-     $gy-=621;
-    }
-    $gy2=($gm>2)?($gy+1):$gy;
-    $days=(365*$gy) +((int)(($gy2+3)/4)) -((int)(($gy2+99)/100)) +((int)(($gy2+399)/400)) -80 +$gd +$g_d_m[$gm-1];
-    $jy+=33*((int)($days/12053)); 
-    $days%=12053;
-    $jy+=4*((int)($days/1461));
-    $days%=1461;
-    if($days > 365){
-     $jy+=(int)(($days-1)/365);
-     $days=($days-1)%365;
-    }
-    $jm=($days < 186)?1+(int)($days/31):7+(int)(($days-186)/30);
-    $jd=1+(($days < 186)?($days%31):(($days-186)%30));
-    return($mod=='')?array($jy,$jm,$jd):$jy.$mod.$jm.$mod.$jd;
-   }
-
-   
-    function DateSplit($date){
-    $y = substr($date,0,4);
-    $m = substr($date,5,2);
-    $d = substr($date,8,2);
-   return $dateResult = MiladiToShamsi($y,$m,$d);
-    
-   }
-  
-
-?>
-
+</div>
+<br>
 <table>
     <thead>
         <th>ContractNum</th>
@@ -85,9 +90,5 @@ function MiladiToShamsi($gy,$gm,$gd,$mod='-'){
         @endforeach
     </tbody>
 </table>
-
-
-
-
 
 @endsection

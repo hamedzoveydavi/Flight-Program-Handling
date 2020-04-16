@@ -21,7 +21,9 @@ class CreateObjectAccsTable extends Migration
         $obj = ['Home','ViewPlan','Account','ConfirmUser','Form','BasicRate',
                     'CreateFlight','DelayForm','ViewFlight','plan','FlightInfo',
                         'WorkOrder','FlightClose','Editors','StatusFlight',
-                            'Reports','Chart','Report','AccListNotAdded','Admin','UserProfileList','Contract','ContractForm','ContractItem'];
+                            'Reports','Chart','Report','AccListNotAdded','Admin',
+                                'UserProfileList','Contract','ContractForm','ContractItem',
+                                    'BaseInfo','CargoBase','StationList','AircraftTypeList','ShareAirportList'];
 
         for ($i=0; $i<count($obj); $i++){
             DB::table('object_accs')->insert(

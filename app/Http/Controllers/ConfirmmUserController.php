@@ -36,7 +36,10 @@ class ConfirmmUserController extends Controller
             $forSysAdmin = ['Home','ViewPlan','Account','ConfirmUser','Form','PlanInfo','BasicRate',
             'CreateFlight','DelayForm','ViewFlight','plan','FlightInfo',
             'WorkOrder','FlightClose','Editors','StatusFlight',
-            'Reports','Chart','Report','UserProfileList','Admin','Contract','ContractForm','ContractItem'];
+            'Reports','Chart','Report','UserProfileList','Admin',
+                'AccListNotAdded','Contract','ContractForm',
+                'ContractItem','BaseInfo','CargoBase',
+                'StationList','AircraftTypeList','ShareList'];
 
         $forCoordinator =  ['Home','Account','Form',
             'CreateFlight','DelayForm','ViewFlight','FlightInfo',
@@ -49,7 +52,7 @@ class ConfirmmUserController extends Controller
 
         $forViewPR =['ViewPlan','Account'];
 
-        $forFinans=['Contract','Contractform','ContractItem'];
+        $forFinans=['Contract','Contractform','ContractItem','BaseInfo','CargoBase','StationList','AircraftTypeList','ShareList'];
 
 
         if($this->acc == 'SysAdmin'){

@@ -94,7 +94,12 @@ Route::POST('FlightReport','FlightTotalReportController@FlightTotalBetweenDate_F
 /*-----------------------------Start BasicRate--------------------------------------------------*/
 
 Route::get('BasicRateView','BasicRateController@ViewTblBasicRate')->name('BasicRateView');
+
+Route::get('BasicRateViewForUpdate','BasicRateController@show')->name('BasicRateViewForUpdate');
+
 Route::post('BasicRateInsert','BasicRateController@BasicRateInsert')->name('BasicRateInsert');
+
+Route::post('BasicRateUpdate','BasicRateController@Update')->name('BasicRateUpdate');
 
 /*-----------------------------End BasicRate--------------------------------------------------*/
 /*-----------------------------Start Equipment--------------------------------------------------*/
@@ -189,19 +194,71 @@ Route::post('/MinGroundTimeStore','MinGroundTimeController@store')->name('MinGro
 
 Route::get('/MinGroundTimeForm','MinGroundTimeController@index')->name('MinGroundTimeForm');
 
-Route::post('/ServicesStore','ContractServicesController@store')->name('ServicesStore');
-
 Route::get('/ServicesItemPage','ContractServicesController@index')->name('ServicesItemPage');
+Route::get('/ServicesItemPageForUpdate','ContractServicesController@show')->name('ServicesItemPageForUpdate');
+Route::post('/ServicesStore','ContractServicesController@store')->name('ServicesStore');
+Route::post('/ServicesUpdate','ContractServicesController@update')->name('ServicesUpdate');
+
 
 Route::get('/ContactList','ContractController@index')->name('ContactList');
+
+Route::post('/ContactSearch','ContractController@show')->name('ContactSearch');
 
 Route::get('/ContactMinDataFetch','MinGroundTimeController@fetch_data')->name('ContactMinDataFetch');
 
 Route::post('/ServicesDeleteItem','ContractServicesController@destroy')->name('ServicesDeleteItem');
 
+
 Route::get('/ctitem','ContractServicesController@fetch_data')->name('ctitem');
 
 Route::get('/ServiceDelete','ContractServicesController@destroy')->name('ServiceDelete');
+/*-----------------------------End Contract--------------------------------------------------*/
+/*-----------------------------Start Cargo--------------------------------------------------*/
+
+Route::get('/CargoBase','CargoBaseController@index')->name('CargoBase');
+
+Route::get('/CargoBaseShow','CargoBaseController@show')->name('CargoBaseShow');
+
+Route::post('/CargoBaseStore','CargoBaseController@store')->name('CargoBaseStore');
+Route::post('/CargoBaseUpdate','CargoBaseController@edit')->name('CargoBaseUpdate');
+Route::get('/CargoBaseDelete','CargoBaseController@destroy')->name('CargoBaseDelete');
+/*-----------------------------End Cargo--------------------------------------------------*/
+/*-----------------------------Start MoneyToAirport--------------------------------------------------*/
+Route::get('/ShareAirportLatter', function () {
+    return view('layouts.includes.BaseInfo.ShareLatterAirport');
+})->name('ShareAirportLatter');
+
+Route::get('/ShareAirportList','ShareLatterAirportController@index')->name('ShareAirportList');
+Route::get('/ShareAirportLatterForUpdate','ShareLatterAirportController@show')->name('ShareAirportLatterForUpdate');
+Route::post('/ShareStore','ShareLatterAirportController@store')->name('ShareStore');
+/*-----------------------------End MoneyToAirport--------------------------------------------------*/
+/*-----------------------------Start Station--------------------------------------------------*/
+Route::get('/Station', function () {
+    return view('layouts.includes.BaseInfo.Station');
+})->name('Station');
+
+Route::get('/StationForUpdate','StationController@show')->name('StationForUpdate');
+
+Route::get('/StationList','StationController@index')->name('StationList');
+
+Route::post('/StationStore','StationController@store')->name('StationStore');
+Route::post('/StationUpdate','StationController@update')->name('StationUpdate');
+/*-----------------------------End Station--------------------------------------------------*/
+/*-----------------------------Start AircraftType--------------------------------------------------*/
+Route::get('/AircraftType', function () {
+    return view('layouts.includes.BaseInfo.AircraftType');
+})->name('AircraftType');
+
+Route::get('/AircraftTypeList','AircraftTypeController@index')->name('AircraftTypeList');
+
+Route::get('/AircraftTypeForUpdate','AircraftTypeController@show')->name('AircraftTypeForUpdate');
+
+Route::post('/AircraftTypeStore','AircraftTypeController@store')->name('AircraftTypeStore');
+
+Route::post('/AircraftTypeUpdate','AircraftTypeController@Update')->name('AircraftTypeUpdate');
+/*-----------------------------End AircraftType--------------------------------------------------*/
+
+
 
 
 

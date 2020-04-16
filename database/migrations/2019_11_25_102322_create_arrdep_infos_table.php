@@ -20,6 +20,7 @@ class CreateArrdepInfosTable extends Migration
             $table->string('Arr_No',5)->nullable();
             $table->string('Dep_No',5)->nullable();
             $table->string('Reg',10)->nullable();
+            $table->string('Arrival',5)->nullable();
             $table->string('Type',10)->nullable();
             $table->string('From',5)->nullable();
             $table->string('To',5)->nullable();
@@ -43,15 +44,19 @@ class CreateArrdepInfosTable extends Migration
             $table->integer('TBD_Dep')->nullable();
             $table->integer('VCIP_Dep')->nullable();
             $table->integer('WCH_Dep')->nullable();
+            $table->integer('PaxCargoDep')->nullable();
+            $table->integer('WeightCargoDep')->nullable();
             /*-----------------------------------------------------------*/
             $table->integer('TPA_ARR')->nullable();
             $table->integer('TBA_ARR')->nullable();
             $table->integer('WCH_ARR')->nullable();
+            $table->integer('PaxCargoArr')->nullable();
+            $table->integer('WeightCargoArr')->nullable();
             /*-----------------------------------------------------------*/
-            $table->string('Coordinator',10)->nullable();
+            $table->string('Coordinator',20)->nullable();
             $table->string('Remark',255)->nullable();
             /*-----------------------------------------------------------*/
-            $table->string('StatusFlight',5)->nullable();
+            $table->string('StatusFlight',7)->nullable();
             $table->timestamps();
         });
     }

@@ -30536,10 +30536,9 @@ input[type=time]::-webkit-clear-button {
     display: table-header-group;
 }
 .divTableCell, .divTableHead {
-    border: 0px solid #999999;
+    border: 0 solid #999999;
     display: table-cell;
-    padding: 3px 10px;
-    text-align: right
+    padding: 3px 10px;    text-align: right
 }
 .divTableHeading {
     margin-left: 5px;
@@ -30772,7 +30771,7 @@ th{
 }
 
 @-webkit-keyframes fadein {
-  from {bottom: 0; opacity: 0;} 
+  from {bottom: 0; opacity: 0;}
   to {bottom: 30px; opacity: 1;}
 }
 
@@ -30782,7 +30781,7 @@ th{
 }
 
 @-webkit-keyframes fadeout {
-  from {bottom: 30px; opacity: 1;} 
+  from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
 
@@ -30790,5 +30789,103 @@ th{
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
+
+.input-group.md-form.form-sm.form-1 input{
+    border: 1px solid #bdbdbd;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+.input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #bdbdbd;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+.input-group.md-form.form-sm.form-2 input.red-border {
+    border: 1px solid #ef9a9a;
+}
+.input-group.md-form.form-sm.form-2 input.lime-border {
+    border: 1px solid #cddc39;
+}
+.input-group.md-form.form-sm.form-2 input.amber-border {
+    border: 1px solid #ffca28;
+}
+
+
+input.switch:empty
+{
+    margin-left: -999px;
+}
+
+
+input.switch:empty ~ label
+{
+    position: relative;
+    float: left;
+    line-height: 1.6em;
+    text-indent: 4em;
+    margin: 0.2em 0;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input.switch:empty ~ label:before,
+input.switch:empty ~ label:after
+{
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    content: ' ';
+    width: 3.6em;
+    background-color: #ccc;
+    border-radius: 0.3em;
+    box-shadow: inset 0 0.2em 0 rgba(0,0,0,0.3);
+    -webkit-transition: all 100ms ease-in;
+    transition: all 100ms ease-in;
+}
+
+input.switch:empty ~ label:after
+{
+    width: 1.4em;
+    top: 0.1em;
+    bottom: 0.1em;
+    margin-left: 0.1em;
+    background-color: #fff;
+    border-radius: 0.15em;
+    box-shadow: inset 0 -0.2em 0 rgba(0,0,0,0.2);
+}
+
+input.switch:checked ~ label:before
+{
+    background-color: #393;
+}
+
+input.switch:checked ~ label:after
+{
+    margin-left: 2em;
+
+}
+
+
+
+
+.FormContiner{
+    border: 1px #1E90FF solid;
+    border-radius: 5px;
+    margin: 5px 10px 10px 10px;
+}
+#ContractHeader{
+    height: 40px;
+    background-color: #d5d8dc ;
+    border: 1px #1E90FF solid ;
+    text-align: left;
+    font:2em bold;
+    padding-bottom: 5px
+}
+
 Resources
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */

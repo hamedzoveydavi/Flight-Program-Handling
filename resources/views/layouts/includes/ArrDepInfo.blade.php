@@ -20,7 +20,7 @@
             padding: 2px;
         }
     </style>
-
+      <div>khgihguygf</div>
 
      <form method="post" action="{{Route('SaveFlightInfo')}}">
          @csrf
@@ -177,9 +177,11 @@
                             @endcomponent
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
+
     </div><br>
 
       <div style="border: 1px #7FFFD4 solid;border-radius: 5px">

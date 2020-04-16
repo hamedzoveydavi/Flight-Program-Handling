@@ -1,19 +1,7 @@
 <link rel="stylesheet" href="{{asset ('css/style.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-    .FormContiner{
-        border: 1px #1E90FF solid;
-        border-radius: 5px;
-        margin: 5px 10px 10px 10px;
-    }
-    #ContractHeader{
-        height: 40px;
-        background-color: #d5d8dc ;
-        border: 1px #1E90FF solid ;
-        text-align: left;
-        font:2em bold;
-        padding-bottom: 5px
-    }
+
 
     .btn {
         background-color: DodgerBlue; /* Blue background */

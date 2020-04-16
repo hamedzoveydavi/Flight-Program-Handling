@@ -35,20 +35,10 @@ class ArrDepContloller extends Controller
 
                 $req = Profile::where('Username',Auth::user()->name)->first();
                 $station = $req->Station;
-        $q = ArrdepInfo::/*where('Date_ETA',date('20y-m-d'))->*/
-        where('From',$station)->
-        select('id','Airline','Arr_No','Dep_No',
-                    'Reg','Type','ATA','ATD','ETA',
-                    'ETD','Date_ETD','Arrival','From','To','ChocksOn',
-                    'ChocksOf','Hall','Gate','ADL_Dep',
-                    'CHD_Dep','INF_Dep','TPD_Dep','TBD_Dep',
-                    'VCIP_Dep','WCH_Dep','TPA_ARR','TBA_ARR',
-                    'WCH_ARR','Status','StatusFlight','Remark'/*,$this->delaycode()*/)->get();
-
-
+                $q = ArrdepInfo::where('From',$station)->get();
                  return view('layouts.includes.ViewTblFlightInfo',['dataInfo' => $q]);
-
             }
+
                  public function delaycode($flightid){
                       $delay = "";
                       $tbl = DelayFlight::where('flightid',$flightid)->select('delaycode','DelayTime')->get();
@@ -61,14 +51,14 @@ class ArrDepContloller extends Controller
         public function view_FlightData(){
             $req = Profile::where('Username',Auth::user()->name)->first();
             $station = $req->Station;
-            $q = ArrdepInfo::where ('Date_ETA',date('20y-m-d'))->where('From',$station)->select('id','Airline','Arr_No','Dep_No','Reg','Type','From','To','ETA','Date_ETA','ETD','Date_ETD','Pos_Park','Status')->get();
+            $q = ArrdepInfo::where ('Date_ETA',date('20y-m-d'))->where('From',$station)->get();
             return view('layouts.includes.ViewTblFlight',['tblflight' => $q]);
         }
 
      public function View_data_FlightInfo_EditStatus(){
         $req = Profile::where('Username',Auth::user()->name)->first();
         $station = $req->Station;
-        $q = ArrdepInfo::/*where ('Date_ETA',date('20y-m-d'))->*/where('From',$station)->where('Status',0)->select('id','Airline','Arr_No','Dep_No','Reg','Type','ATA','ATD','ETA','ETD','From','To','Date_ETD','Status' )->get();
+        $q = ArrdepInfo::/*where ('Date_ETA',date('20y-m-d'))->*/where('From',$station)->where('Status',0)->get();
         return view('layouts.includes.StatusFlight',['StatusFlight' => $q]);
     }
 
@@ -77,13 +67,13 @@ class ArrDepContloller extends Controller
         $SearchInfo= $_POST['SearchInfo'];
         $req = Profile::where('Username',Auth::user()->name)->first();
         $station = $req->Station;
-        $q = ArrdepInfo::where ('Date_ETD',$SearchInfo)->orwhere('Date_ETD',$SearchInfo)->where('From',$station)->select('id','Airline','Arr_No','Dep_No','Reg','Type','From','To','ETA','Date_ETA','ETD','Date_ETD','Pos_Park','Status')->get();
+        $q = ArrdepInfo::where ('Date_ETD',$SearchInfo)->orwhere('Date_ETD',$SearchInfo)->where('From',$station)->get();
         return view('layouts.includes.ViewTblFlight',['tblflight' => $q]);
     }
 
     public function View_data_SearchFlightInfo(){
         $SearchInfo= $_POST['SearchInfo'];
-        $q = ArrdepInfo::where ('Date_ETA',$SearchInfo)->where('From',Auth::user()->Station)->select('id','Airline','Arr_No','Dep_No','Reg','Type','ATA','ATD','ETA','ETD','Date_ETD','To','ChocksOn','ChocksOf','Hall','Gate','ADL_Dep','CHD_Dep','INF_Dep','TPD_Dep','TBD_Dep','VCIP_Dep','WCH_Dep','TPA_ARR','TBA_ARR','WCH_ARR','Status','StatusFlight','Remark' )->get();
+        $q = ArrdepInfo::where ('Date_ETA',$SearchInfo)->where('From',Auth::user()->Station)->get();
         return view('layouts.includes.ViewTblFlightInfo',['dataInfo' => $q]);
 
     }
@@ -207,9 +197,9 @@ class ArrDepContloller extends Controller
 
     public function CreateFlightInfo(Request $request){
 
-        $id = $_POST['id'];
-         $Prg =  ArrdepInfo::where ('id',$id)->first() ;
-         $Prg->ATA = $request->input('ATA');
+         $id = $request->input('id');
+          $Prg =  ArrdepInfo::where ('id',$id )->first() ;
+          $Prg->ATA = $request->input('ATA');
           $Prg->ChocksOn = $request->input('ChocksOn');
           $Prg->ChocksOf = $request->input('ChocksOf');
           $Prg->ATD = $request->input('ATD');
@@ -222,9 +212,14 @@ class ArrDepContloller extends Controller
           $Prg->TBD_Dep = $request->input('TBD_Dep');
           $Prg->VCIP_Dep = $request->input('VCIP_Dep');
           $Prg->WCH_Dep = $request->input('WCH_Dep');
+          $Prg->PaxCargoDep = $request->input('PaxCargoDep');
+          $Prg->WeightCargoDep = $request->input('WeightCargoDep');
           $Prg->TPA_ARR = $request->input('TPA_ARR');
           $Prg->TBA_ARR = $request->input('TBA_ARR');
           $Prg->WCH_ARR = $request->input('WCH_ARR');
+          $Prg->PaxCargoArr = $request->input('PaxCargoArr');
+          $Prg->WeightCargoArr = $request->input('WeightCargoArr');
+
           $Prg->Coordinator =(Auth::user()->name);
           $Prg->Remark = $request->input('Remark');
 
@@ -244,7 +239,10 @@ class ArrDepContloller extends Controller
              if ($Prg->update()) {
                  return back()->with('success', 'اطلاعت مورد نظر با موفقیت ذخیره شد ');
              }
-         }
+         }elseif ( $DelayCalc == 0 &&  $hasdel == 0 ) {}
+        if ($Prg->update()) {
+            return back()->with('success', 'اطلاعت مورد نظر با موفقیت ذخیره شد ');
+        }
          }
 
 
@@ -254,6 +252,7 @@ class ArrDepContloller extends Controller
         $Prg = ArrdepInfo::where('id', $id)->first();
         $Prg->status = '0';
         $Prg->update();
+
        return back()->with('View_data_FlightInfo_EditStatus');
 
     }
