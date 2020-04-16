@@ -68,6 +68,7 @@
                     <button id="btn" class="btn" style="width: 330px;height: 40px"><i class="fa fa-update"></i>     <i> Update</i> </button>
                     @else
                     <button id="btn" class="btn" style="width: 330px;height: 40px"><i class="fa fa-save"></i>     <i> Save</i> </button>
+            @endif
             </div>
         </form>
 
@@ -93,13 +94,14 @@
         <thead class="table-primary" >
         <tr>
             <th scope="col">Action</th>
+            <th scope="col" style="text-align: center">Percent</th>
             <th scope="col">Subject</th>
             <th scope="row">No</th>
         </tr>
         </thead>
         <tbody>
 
-        @foreach( $Eqdata as $c)
+        @foreach($Eqdata as $c)
             <tr>
                 <td> <a href="{{Route('BasicRateViewForUpdate',['id'=>$c->id])}}"><img src="images/edit.png"></a>
                     <a id="delete"  href="{{Route('ServiceDelete',['serid'=>$c->id])}}"> <img src="images/delete.png"></a></td>

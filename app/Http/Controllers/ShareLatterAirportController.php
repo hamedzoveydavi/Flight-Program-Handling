@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\ShareLatterAirport;
 use Illuminate\Http\Request;
+use App\Station;
+use App\BasicRate;
 
 class ShareLatterAirportController extends Controller
 {
@@ -25,7 +27,10 @@ class ShareLatterAirportController extends Controller
      */
     public function create()
     {
-        //
+        $st = Station::all();
+        $br = BasicRate::all();
+        $tbl = ShareLatterAirport::where('id',$_GET['id'])->first();
+        return view('layouts.includes.BaseInfo.ShareAirportSetting',['data'=>$tbl,'station'=>$st,'basicrate'=>$br]);
     }
 
     /**
@@ -59,6 +64,7 @@ class ShareLatterAirportController extends Controller
             $lastReq->Status = 0;
             $lastReq->update();
         }
+           
       }
 
     /**
@@ -69,9 +75,12 @@ class ShareLatterAirportController extends Controller
      */
     public function show()
     {
-        $tbl = ShareLatterAirport::all();
+        $tbl = ShareLatterAirport::where('id',$_GET['id'])->first();
         return view('layouts.includes.BaseInfo.ShareLatterAirport',['data'=>$tbl]);
     }
+
+  
+
 
     /**
      * Show the form for editing the specified resource.
@@ -91,9 +100,18 @@ class ShareLatterAirportController extends Controller
      * @param  \App\ShareLatterAirport  $shareLatterAirport
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ShareLatterAirport $shareLatterAirport)
+    public function update(Request $request)
     {
-        //
+        $tbl = ShareLatterAirport::where('id',$request->input('id'))->first();
+        $tbl->LatterNum = $request->input('LatterNum');
+        $tbl->Date = $request->input('Date');
+        $tbl->Station = $request->input('Station');
+        if($tbl->update()){
+            return back()->with('success','Data Updated successfully!');
+        }else{
+            return back()->with('error','Woops , Something is Worng');
+        }
+
     }
 
     /**

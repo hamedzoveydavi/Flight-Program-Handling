@@ -24,13 +24,15 @@
     <div id="ShareLatter" class="FormContiner">
         <div id="ContractHeader"> Saved Latter Information</div>
 
-       {{-- @if (!empty($data))
-            <form method="post" action="{{Route('ServicesStore')}}">
+        @if (!empty($data))
+            <form method="post" action="{{Route('ShareUpdate')}}">
             @csrf
-        @else--}}
+            
+            <input type="text" name="id" value="{{$data->id}}" style="display:none">
+        @else
             <form method="post" action="{{Route('ShareStore')}}">
             @csrf
-        {{--@endif--}}
+        @endif
 
 
 <br>
@@ -41,7 +43,7 @@
             </div>
             <input id="LatterNum"  style="text-align: center"
                 type="text" class="form-control @error('LatterNum') is-invalid @enderror"  name="LatterNum"
-            value="<?php if(!empty($dservice)){echo $dservice->BasePay ;} ?>"  required autofocus>
+            value="<?php if(!empty($data)){echo $data->LatterNum ;} ?>"  required autofocus>
             @error('LatterNum')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -57,7 +59,7 @@
                     </div>
                     <input id="Date"  style="text-align: center"
                            type="text" class="form-control @error('Date') is-invalid @enderror"  name="Date" placeholder="1399/01/01"
-                    value="<?php if(!empty($dservice)){echo $dservice->BasePay ;} ?>"  required autofocus>
+                    value="<?php if(!empty($data)){echo $data->Date ;} ?>"  required autofocus>
                     @error('Date')
                     <span class="invalid-feedback" role="alert">
                          <strong>{{ $message }}</strong>
@@ -76,7 +78,11 @@
                     $tbl = Station::all();
                     ?>
                     <select name="Station" style="width: 231px;height: 35px;">
+                    @if(!empty($data))
+                        <option>{{$data->Station}}</option>
+                    @else
                         <option hidden value="" disabled selected>Select a Station</option>
+                    @endif
                         @if(!empty($tbl))
                             @foreach($tbl as $list)
                             <option > {{$list->Symbol}} </option>

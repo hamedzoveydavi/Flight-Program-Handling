@@ -41,11 +41,12 @@
 <table>
     <thead>
         <th>#</th>
-        <th>id</th>
+        <th>No</th>
         <th>Station</th>
         <th>latter Num</th>
         <th>Date</th>
-        <th>Status</th>
+       
+        <th>Edid</th>
         <th>Titel</th>
     </thead>
 
@@ -57,11 +58,19 @@
             <td>{{$list->Station}}</td>
             <td>{{$list->LatterNum}}</td>
             <td>{{$list->Date}}</td>
-            <td>@if($list->Status == 0) Disable @else Active @endif </td>
-
-            <td><button id="btn" class="btn" style="width: 100px;height: 35px">
-<i class="fa fa-folder"></i>
- <i> Titel</i>
+            <td>    
+            <button type="button" id="btn" class="btn-warning" style="width: 100px;height: 35px"
+            onclick=" myPopup ('{{Route('ShareAirportLatterForUpdate',['id'=>$list->id])}}', 'web', 600,390);"
+                            >
+                <i class="fa fa-edit"></i>
+                <i> Edit</i>
+                </button></td>
+            <td>
+                 <button id="btn" class="btn btn-info" style="width: 100px;height: 35px"
+                 onclick=" myPopup ('{{Route('ShareAirportSetting',['id'=>$list->id])}}', 'web', 1000,500);"
+                    >
+                <i class="fa fa-folder"></i>
+                <i> Titel</i>
  </button></td>
 
         </tr>
