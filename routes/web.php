@@ -230,9 +230,11 @@ Route::get('/ShareAirportLatter', function () {
 
 Route::get('/ShareAirportList','ShareLatterAirportController@index')->name('ShareAirportList');
 Route::get('/ShareAirportLatterForUpdate','ShareLatterAirportController@show')->name('ShareAirportLatterForUpdate');
-Route::get('/ShareAirportSetting','ShareLatterAirportController@Create')->name('ShareAirportSetting');
+Route::get('/ShareAirportSetting','ShareAirportSettingController@index')->name('ShareAirportSetting');
 Route::post('/ShareStore','ShareLatterAirportController@store')->name('ShareStore');
 Route::post('/ShareUpdate','ShareLatterAirportController@update')->name('ShareUpdate');
+Route::post('/ShareSettingStore','ShareAirportSettingController@store')->name('ShareSettingStore');
+Route::post('/ShareSettingUpdate','ShareAirportSettingController@update')->name('ShareSettingUpdate');
 /*-----------------------------End MoneyToAirport--------------------------------------------------*/
 /*-----------------------------Start Station--------------------------------------------------*/
 Route::get('/Station', function () {

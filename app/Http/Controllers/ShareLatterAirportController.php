@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\ShareLatterAirport;
 use Illuminate\Http\Request;
-use App\Station;
-use App\BasicRate;
+
+
 
 class ShareLatterAirportController extends Controller
 {
@@ -27,10 +27,7 @@ class ShareLatterAirportController extends Controller
      */
     public function create()
     {
-        $st = Station::all();
-        $br = BasicRate::all();
-        $tbl = ShareLatterAirport::where('id',$_GET['id'])->first();
-        return view('layouts.includes.BaseInfo.ShareAirportSetting',['data'=>$tbl,'station'=>$st,'basicrate'=>$br]);
+        //
     }
 
     /**
@@ -64,7 +61,7 @@ class ShareLatterAirportController extends Controller
             $lastReq->Status = 0;
             $lastReq->update();
         }
-           
+
       }
 
     /**
@@ -79,7 +76,7 @@ class ShareLatterAirportController extends Controller
         return view('layouts.includes.BaseInfo.ShareLatterAirport',['data'=>$tbl]);
     }
 
-  
+
 
 
     /**
