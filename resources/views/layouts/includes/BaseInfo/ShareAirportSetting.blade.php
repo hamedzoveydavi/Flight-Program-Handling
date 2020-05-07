@@ -34,8 +34,9 @@
 
     }
     .BasicRate{
-        width: 600px;
+        width: auto;
         padding: 5px 5px 5px 5px;
+        overflow-y:auto;
     }
     .container{
         width: 90%;
@@ -44,39 +45,43 @@
         padding: 5px 5px 5px 5px;
         border-radius: 3px;
     }
+    html, body {
+        overflow: visible;
+    }
 
 </style>
+
+
+
+
 <div class="container">
     {{--------------------------------start row---------------------------------------------------}}
     <div class="divTableRow">
         {{--------------------------------start cell---------------------------------------------------}}
         <div class="divTableCell" >
             {{-----------------------------------------------------------------------------------}}
-            <div class="groupbox-shadow BasicRate" >
-                <table>
-                      <thead>
-                      @if(!empty($Sthead))
-                            @foreach($Sthead as $stlist)
-                                <th {{--style="width: 100px;text-align: center--}}"> {{$stlist->Station}}</th>
-                            @endforeach
-                        @endif
-                       
-                        </thead>
-                        <tbody>
-                        @foreach($tdata as $list)
-                            <tr>
+            @if(!empty($Sthead))
 
-                                    <form method="post" action="{{Route('ShareSettingUpdate',['id'=>$list->id])}}">
+                @foreach($Sthead as $stlist)
+            <div class="groupbox-shadow BasicRate" >
+                                     
+                         <div id="ContractHeader"> Station : {{$stlist->Station}} </div>
+              <table>
+                      <tbody>
+
+                        @foreach($tdata as $list)
+                      
+                      @if($list->Station == $stlist->Station)
+                            <tr>
+                                 <form method="post" action="{{Route('ShareSettingUpdate',['id'=>$list->id])}}">
                                         @csrf
+                              
                                         <td style="direction: rtl" >
                                             <div >
-
-                                                @foreach($TypeAc as $TypList)
-                                                
-                                                    <div class="divTableRow">
-
-                                                       <div class="divTableCell">
-                                                           <input name="Type" type="text"  value="{{$TypList->Type}}@if(!empty($TypList->SubGroup))-{{$TypList->SubGroup}} @endif"  > <br>
+                                                                                         
+                                                   <div class="divTableRow">
+                                                        <div class="divTableCell">
+                                                           <input name="Type" type="text"  value="{{$list->Type}}@if(!empty($list->SubGroup))-{{$list->SubGroup}} @endif"  > <br>
                                                         </div>
                                                         <div class="divTableCell" >
                                                             <input type="text" name="Price" style="border: 1px solid black;text-align: center" placeholder="400,000">
@@ -90,16 +95,21 @@
                                                         </div>
 
                                                     </div>
-                                                @endforeach
-                                            </div>
+                                               </div>
                                         </td>
-                                    </form>
+                                 </form>
                                  </tr>
-                         @endforeach
-                        </tbody>
-               </table>
-
+                                 @endif
+                        @endforeach
+                       </tbody>
+                  </table>
             </div>
+            <br>
+               @endforeach
+               
+
+
+           @endif
             {{-----------------------------------------------------------------------------------}}
         </div>
         {{--------------------------------end cell---------------------------------------------------}}
@@ -111,7 +121,7 @@
                  <div class="groupbox-shadow Sidbardata" >
                     <div class="groupbox-shadow" style="text-align: left;height: 22%">
                              <input name="id" type="text" value="{{$data->id}}" style="display:none">
-                            <div name="LetteNum" class="HeadItem" style="margin-bottom: 10px ">Latter Number :   {{$data->LatterNum}} </div>
+                            <div name="LetteNum" class="HeadItem" style="margin-bottom: 10px ">Latter Number :  {{$data->LatterNum}}</div>
                             <div class="HeadItem" >Issue Date :{{$data->Date}}</div>
                     </div>
                     <br>

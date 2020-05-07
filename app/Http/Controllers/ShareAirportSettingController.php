@@ -47,17 +47,17 @@ class ShareAirportSettingController extends Controller
     {
 
         $st = $request->check_list ;
-        $type = AircraftType::all();  
+        $type = AircraftType::all();
 
-        
+
         for($i= 0 ;$i<(count($st));$i++){
-
-        foreach($type as $list){
+            foreach($type as $list){
              $tlst = $list->Type .'-'.$list->SubGroup ;
                 DB::table('share_airport_settings')->insert(
                 array('id_ShareLetter'=>$request->input('id'),'Station'=>$st[$i],'Type'=>$tlst));
-        }
+            }
       }
+      return $this->index();
     }
 
     /**

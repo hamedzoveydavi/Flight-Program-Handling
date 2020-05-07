@@ -16,7 +16,7 @@ class ShareLatterAirportController extends Controller
      */
     public function index()
     {
-        $tbl = ShareLatterAirport::where('Status',1)->get();
+        $tbl = ShareLatterAirport::orderBy('id','desc')->get();
         return view('layouts.includes.BaseInfo.ShareAirportList',['data'=>$tbl]);
     }
 

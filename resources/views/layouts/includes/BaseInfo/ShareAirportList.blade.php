@@ -28,7 +28,7 @@
     width: 15px;
     height: 15px;
     border-radius: 15px;
-    background-color: #00c689;
+    background-color:red;
 
 }
 </style>
@@ -52,7 +52,7 @@
 
     <tbody>
     @foreach($data as $list)
-        <tr>
+         <tr style="background-color: @if($list->Status == 0) silver @endif">
             <td style="text-align: center;padding-top: 7px">@if($list->Status == 0) <label class="red-point"></label> @else <label class="green-point"></label> @endif</td>
             <td>{{$list->id}}</td>
             <td>{{$list->Station}}</td>
@@ -66,12 +66,12 @@
                 <i> Edit</i>
                 </button></td>
             <td>
-                 <button id="btn" class="btn btn-info" style="width: 100px;height: 35px"
-                 onclick=" myPopup ('{{Route('ShareAirportSetting',['id'=>$list->id])}}', 'web', 1000,600);"
+                 <a id="btn" class="btn btn-info" style="width: 100px;height: 35px" href="{{Route('ShareAirportSetting',['id'=>$list->id])}}" target="_blank"
+                {{-- onclick=" myPopup ('{{Route('ShareAirportSetting',['id'=>$list->id])}}', 'web', 1800,1000);"--}}
                     >
                 <i class="fa fa-folder"></i>
                 <i> Titel</i>
- </button></td>
+ </a></td>
 
         </tr>
         @endforeach
