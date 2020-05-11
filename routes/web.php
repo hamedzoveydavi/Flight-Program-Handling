@@ -235,6 +235,9 @@ Route::post('/ShareStore','ShareLatterAirportController@store')->name('ShareStor
 Route::post('/ShareUpdate','ShareLatterAirportController@update')->name('ShareUpdate');
 Route::post('/ShareSettingStore','ShareAirportSettingController@store')->name('ShareSettingStore');
 Route::post('/ShareSettingUpdate','ShareAirportSettingController@update')->name('ShareSettingUpdate');
+Route::post('/ShareSettingDelete','ShareAirportSettingController@destroy')->name('ShareSettingDelete');
+Route::post('/ShareSettingTypeStore','ShareAirportSettingController@AircraftTypestore')->name('ShareSettingTypeStore');
+
 /*-----------------------------End MoneyToAirport--------------------------------------------------*/
 /*-----------------------------Start Station--------------------------------------------------*/
 Route::get('/Station', function () {

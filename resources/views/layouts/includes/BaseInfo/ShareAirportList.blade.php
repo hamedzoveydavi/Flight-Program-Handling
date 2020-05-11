@@ -59,9 +59,9 @@
             <td>{{$list->LatterNum}}</td>
             <td>{{$list->Date}}</td>
             <td>
-            <button type="button" id="btn" class="btn-warning" style="width: 100px;height: 35px"
+            <button type="button" id="btn" @if($list->Status == 0) class="btn btn-primary disabled" @else class="btn-warning" @endif style="width: 100px;height: 35px"
             onclick=" myPopup ('{{Route('ShareAirportLatterForUpdate',['id'=>$list->id])}}', 'web', 600,390);"
-                            >
+            @if($list->Status == 0)  disabled @endif >
                 <i class="fa fa-edit"></i>
                 <i> Edit</i>
                 </button></td>

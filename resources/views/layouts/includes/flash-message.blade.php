@@ -2,16 +2,13 @@
 @if ($message = Session::get('success'))
 
 <div class="alert alert-success alert-block">
-
 	<button type="button" class="close" data-dismiss="alert">×</button>
-
         <strong>{{ $message }}</strong>
-
 </div>
 
 @endif
 
-{{--@if(Session::has('success'))
+@if(Session::has('success-Share'))
     <script type="text/javascript">
         swal({
             title:'Success!',
@@ -22,7 +19,9 @@
             //location.reload();
         }).catch(swal.noop);
     </script>
-@endif--}}
+    
+    
+@endif
 
 
 
@@ -115,7 +114,6 @@
 
 
 <script>
-
 function myFunction() {
         var x = document.getElementById("snackbar");
         x.className = "show";

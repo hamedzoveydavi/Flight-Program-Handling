@@ -9,6 +9,7 @@ use App\AircraftType;
 use App\ShareLatterAirport;
 
 
+
 class ShareAirportSettingController extends Controller
 {
     /**
@@ -49,6 +50,8 @@ class ShareAirportSettingController extends Controller
         $st = $request->check_list ;
         $type = AircraftType::all();
 
+if (!empty($st)){
+
 
         for($i= 0 ;$i<(count($st));$i++){
             foreach($type as $list){
@@ -59,6 +62,24 @@ class ShareAirportSettingController extends Controller
       }
       return $this->index();
     }
+}
+    public function AircraftTypestore(Request $request){
+        
+        $tbl = new ShareAirportSetting;
+        $id= ShareLatterAirport::where('Station',$request->input('Station'))->where('Status','1')->first();
+         $tbl->id_Shareletter = $id->id;
+         $tbl->Station = $request->input('Station');
+        $tbl->Type = $request->input('Type');
+        //$tbl->Price="";
+        if($tbl->save()){
+            return back()->with('success','AircraftType Saved successfully!');
+        }else{
+            return back()->with('error','Woops , Something is Worng');
+        }
+
+    }
+
+  
 
     /**
      * Display the specified resource.
@@ -93,9 +114,10 @@ class ShareAirportSettingController extends Controller
     public function update(Request $request)
     {
         $id=$_GET['id'];
-        $tbl = ShareAirportSetting::where('id_Shareletter',$id)->first();
-                $tbl->Price = $request->input('Price');
+        $tbl = ShareAirportSetting::where('id',$id)->first();
+        $tbl->Price = str_replace(',','',$request->input('Price'));
        if( $tbl->update()){
+        
             return back()->with('success','Price Saved successfully!');
                 }else{
             return back()->with('error','Woops , Something is Worng');
@@ -110,8 +132,14 @@ class ShareAirportSettingController extends Controller
      * @param  \App\ShareAirportSetting  $shareAirportSetting
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ShareAirportSetting $shareAirportSetting)
+    public function destroy()
     {
-        //
+        $id=$_GET['id'];
+        $tbl = ShareAirportSetting::where('id',$id)->first();
+        if($tbl->delete()){
+            return back()->with('success','Price Deleted successfully!');
+                }else{
+            return back()->with('error','Woops , Something is Worng');
+        }
     }
 }
